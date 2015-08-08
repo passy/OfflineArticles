@@ -4,12 +4,20 @@ import android.app.Activity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import org.jetbrains.anko.*
 
 public class MainActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        verticalLayout {
+            padding = dip(16)
+
+            textView("Hello, World") {
+                textSize = 16f
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
