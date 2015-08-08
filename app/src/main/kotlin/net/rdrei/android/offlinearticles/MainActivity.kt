@@ -2,8 +2,13 @@ package net.rdrei.android.offlinearticles
 
 import android.app.Activity
 import android.os.Bundle
+import android.text.InputType
 import android.view.Menu
 import android.view.MenuItem
+import android.view.inputmethod.EditorInfo
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
 import org.jetbrains.anko.*
 
 public class MainActivity : Activity() {
@@ -17,7 +22,19 @@ public class MainActivity : Activity() {
             textView("Hello, World") {
                 textSize = 16f
             }
+
+            val newArticle = editText() {
+                inputType = InputType.TYPE_TEXT_VARIATION_URI
+            }
+
+            button("Add Article") {
+                onClick {  addArticle(newArticle.getText().toString()) }
+            }
         }
+    }
+
+    fun addArticle(uri: String) {
+        toast("New article to be added: " + uri)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
