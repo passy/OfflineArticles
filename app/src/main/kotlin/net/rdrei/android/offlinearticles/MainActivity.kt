@@ -9,6 +9,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.parse.ParseAnalytics
 import org.jetbrains.anko.*
 
 public class MainActivity : Activity() {
@@ -34,6 +35,7 @@ public class MainActivity : Activity() {
     }
 
     fun addArticle(uri: String) {
+        ParseAnalytics.trackEventInBackground(getLocalClassName() + ":addArticle")
         toast("New article to be added: " + uri)
     }
 
