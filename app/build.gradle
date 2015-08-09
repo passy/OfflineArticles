@@ -21,10 +21,16 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
+    // Allows us to use a gradles.properties to specify these instead of having
+    // to hardcode them in Java and check them in into VCS.
+    applicationVariants.all { variant ->
+        variant.buildConfigField 'String', 'PARSE_APPLICATION_ID', "\"" + parseApplicationId + "\""
+        variant.buildConfigField 'String', 'PARSE_MASTER_KEY', "\"" + parseMasterKey + "\""
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     compile 'org.jetbrains.anko:anko:0.6.3-15'
 }
