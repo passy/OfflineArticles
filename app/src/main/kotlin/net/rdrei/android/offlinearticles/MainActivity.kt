@@ -11,7 +11,9 @@ import android.widget.TextView
 import android.widget.Toast
 import com.parse.Parse
 import com.parse.ParseAnalytics
+import net.rdrei.android.offlinearticles.model.Bookmark
 import org.jetbrains.anko.*
+import java.net.URI
 
 public class MainActivity : Activity() {
 
@@ -36,6 +38,9 @@ public class MainActivity : Activity() {
     }
 
     fun addArticle(uri: String) {
+        val bookmark = Bookmark(URI(uri))
+        bookmark.saveEventually()
+
         ParseAnalytics.trackEventInBackground(getLocalClassName() + ":addArticle")
         toast("New article to be added: " + uri)
     }
