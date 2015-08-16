@@ -25,7 +25,7 @@ android {
     // to hardcode them in Java and check them in into VCS.
     applicationVariants.all { variant ->
         variant.buildConfigField 'String', 'PARSE_APPLICATION_ID', "\"" + parseApplicationId + "\""
-        variant.buildConfigField 'String', 'PARSE_MASTER_KEY', "\"" + parseMasterKey + "\""
+        variant.buildConfigField 'String', 'PARSE_CLIENT_KEY', "\"" + parseClientKey + "\""
     }
 }
 

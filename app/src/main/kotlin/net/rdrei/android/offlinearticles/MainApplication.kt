@@ -18,6 +18,6 @@ class MainApplication : Application() {
         Parse.initialize(
                 this,
                 BuildConfig.PARSE_APPLICATION_ID,
-                BuildConfig.PARSE_MASTER_KEY)
+                BuildConfig.PARSE_CLIENT_KEY)
     }
 }
