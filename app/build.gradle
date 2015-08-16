@@ -53,6 +53,8 @@ dependencies {
         exclude module: "parse"
         exclude module: "bolts-android"
     }
+    compile 'com.trello:rxlifecycle:0.1.0'
+    compile 'com.trello:rxlifecycle-components:0.1.0'
 
     // Various
     compile 'com.github.bumptech.glide:glide:3.5.2'
