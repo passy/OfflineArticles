@@ -46,13 +46,16 @@ dependencies {
 
     // Kotlin
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compile 'org.jetbrains.anko:anko:0.6.3-15'
+    compile 'org.jetbrains.anko:anko:0.6.3-19s'
 
     // Rx
     compile('com.infstory:rxparse:1.0.3') {
         exclude module: "parse"
         exclude module: "bolts-android"
     }
+
+    // Various
+    compile 'com.github.bumptech.glide:glide:3.5.2'
 }
 
 buildscript {
