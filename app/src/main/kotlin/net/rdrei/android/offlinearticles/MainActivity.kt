@@ -1,15 +1,11 @@
 package net.rdrei.android.offlinearticles
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
 import android.view.Menu
 import android.view.MenuItem
-import android.view.inputmethod.EditorInfo
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
-import com.parse.Parse
 import com.parse.ParseAnalytics
 import net.rdrei.android.offlinearticles.model.Bookmark
 import org.jetbrains.anko.*
@@ -33,6 +29,11 @@ public class MainActivity : Activity() {
 
             button("Add Article") {
                 onClick {  addArticle(newArticle.getText().toString()) }
+            }
+
+            // Everyone knows this is for testing only. Right? RIGHT!?
+            button("Show List") {
+                onClick { startActivity<BookmarkListActivity>() }
             }
         }
     }

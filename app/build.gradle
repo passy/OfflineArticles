@@ -2,13 +2,13 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 'android-MNC'
+    compileSdkVersion 22
     buildToolsVersion "23.0.0 rc3"
 
     defaultConfig {
         applicationId "net.rdrei.android.offlinearticles"
-        minSdkVersion 'MNC'
-        targetSdkVersion 'MNC'
+        minSdkVersion 22
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
     }
@@ -37,17 +37,26 @@ repositories {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
 
-    compile 'com.infstory:parse:1.9.2'
-    compile 'com.infstory:parse-crash-reporting:1.9.2'
-    compile 'com.infstory:parse-facebook-v4:1.9.2' // compile 'com.facebook.android:facebook-android-sdk:4.1.2'
+    // Android
+    compile 'com.android.support:recyclerview-v7:22.2.1'
 
+    // Parse
+    compile 'com.parse:parse-android:1.10.0'
+    compile 'com.infstory:parse-crash-reporting:1.9.2'
+
+    // Kotlin
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     compile 'org.jetbrains.anko:anko:0.6.3-15'
-    compile 'com.infstory:rxparse:1.0.3'
+
+    // Rx
+    compile('com.infstory:rxparse:1.0.3') {
+        exclude module: "parse"
+        exclude module: "bolts-android"
+    }
 }
 
 buildscript {
-    ext.kotlin_version = '0.12.1218'
+    ext.kotlin_version = '0.12.1230'
     repositories {
         mavenCentral()
     }
