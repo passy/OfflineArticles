@@ -45,7 +45,7 @@ public class BookmarkListActivity : RxActivity(), AnkoLogger {
         refresh()
     }
 
-    fun refresh() {
+    private fun refresh() {
         Bookmark.Queries.getAllObservable()
                 .compose(bindToLifecycle<Bookmark>())
                 .subscribe { bookmark ->
@@ -54,10 +54,4 @@ public class BookmarkListActivity : RxActivity(), AnkoLogger {
                     adapter.notifyDataSetChanged()
                 }
     }
-
-    fun ViewManager.refreshLayout(init: SwipeRefreshLayout.() -> Unit = {}) =
-            __dslAddView({ SwipeRefreshLayout(it) }, init, this)
-
-    fun ViewManager.recyclerView(init: RecyclerView.() -> Unit = {}) =
-            __dslAddView({ RecyclerView(it) }, init, this)
 }
