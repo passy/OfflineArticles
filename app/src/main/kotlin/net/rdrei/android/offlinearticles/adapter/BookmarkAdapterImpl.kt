@@ -1,16 +1,17 @@
-package net.rdrei.android.offlinearticles
+package net.rdrei.android.offlinearticles.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import net.rdrei.android.offlinearticles.R
 import net.rdrei.android.offlinearticles.model.Bookmark
 import org.jetbrains.anko.*
 import java.net.URI
 import java.util.ArrayList
 
-class BookmarkAdapter : RecyclerView.Adapter<BookmarkAdapter.ViewHolder>(), AnkoLogger {
+class BookmarkAdapterImpl : RecyclerView.Adapter<BookmarkAdapterImpl.ViewHolder>(), AnkoLogger {
     val items = ArrayList<Bookmark>()
 
     override fun getItemCount(): Int {
