@@ -3,4 +3,5 @@
     <item type="id" name="refresh" />
     <item type="id" name="recycler" />
     <item type="id" name="text" />
+    <item type="id" name="articleWebView" />
 </resources>

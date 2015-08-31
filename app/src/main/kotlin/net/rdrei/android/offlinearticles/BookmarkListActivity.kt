@@ -9,6 +9,7 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.enabled
 import org.jetbrains.anko.id
 import org.jetbrains.anko.verticalLayout
+import java.net.URI
 import kotlin.properties.Delegates
 
 public class BookmarkListActivity : RxActivity(), AnkoLogger {
@@ -43,6 +44,7 @@ public class BookmarkListActivity : RxActivity(), AnkoLogger {
     }
 
     private fun refresh() {
+        adapter.items.add(Bookmark(URI("https://rdrei.net")))
         Bookmark.Queries.getAllObservable()
                 .compose(bindToLifecycle<Bookmark>())
                 .subscribe { bookmark ->

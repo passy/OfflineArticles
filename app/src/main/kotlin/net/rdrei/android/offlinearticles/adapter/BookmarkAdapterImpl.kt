@@ -1,13 +1,20 @@
 package net.rdrei.android.offlinearticles.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import net.rdrei.android.offlinearticles.ArticleActivity
 import net.rdrei.android.offlinearticles.R
 import net.rdrei.android.offlinearticles.model.Bookmark
-import org.jetbrains.anko.*
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.find
+import org.jetbrains.anko.id
+import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.textView
+import org.jetbrains.anko.verticalLayout
 import java.net.URI
 import java.util.ArrayList
 
@@ -32,6 +39,8 @@ class BookmarkAdapterImpl : BookmarkAdapter, RecyclerView.Adapter<BookmarkAdapte
         val v = buildLayout(ctx)
 
         val text = v.find<TextView>(R.id.text)
+        // Leak!
+        v.setOnClickListener { ctx.startActivity(ctx.intentFor<ArticleActivity>()) }
 
         return ViewHolder(v, text)
     }
