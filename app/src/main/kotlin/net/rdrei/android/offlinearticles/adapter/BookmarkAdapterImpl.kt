@@ -11,8 +11,8 @@ import org.jetbrains.anko.*
 import java.net.URI
 import java.util.ArrayList
 
-class BookmarkAdapterImpl : RecyclerView.Adapter<BookmarkAdapterImpl.ViewHolder>(), AnkoLogger {
-    val items = ArrayList<Bookmark>()
+class BookmarkAdapterImpl : BookmarkAdapter, RecyclerView.Adapter<BookmarkAdapterImpl.ViewHolder>(), AnkoLogger {
+    override val items = ArrayList<Bookmark>()
 
     override fun getItemCount(): Int {
         return items.size()
