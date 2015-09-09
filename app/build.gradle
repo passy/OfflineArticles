@@ -2,13 +2,13 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion "23.0.0 rc3"
+    compileSdkVersion 23
+    buildToolsVersion "23.0.0"
 
     defaultConfig {
         applicationId "net.rdrei.android.offlinearticles"
-        minSdkVersion 22
-        targetSdkVersion 22
+        minSdkVersion 23
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
     }
@@ -35,13 +35,17 @@ repositories {
 }
 
 dependencies {
+    // Plugins
+    apply plugin: 'com.github.ben-manes.versions'
+
+    // JARs
     compile fileTree(include: ['*.jar'], dir: 'libs')
 
     // Android
-    compile 'com.android.support:recyclerview-v7:22.2.1'
+    compile 'com.android.support:recyclerview-v7:23.0.1'
 
     // Parse
-    compile 'com.parse:parse-android:1.10.0'
+    compile 'com.parse:parse-android:1.10.1'
     compile 'com.infstory:parse-crash-reporting:1.9.2'
 
     // Kotlin
@@ -53,11 +57,11 @@ dependencies {
         exclude module: "parse"
         exclude module: "bolts-android"
     }
-    compile 'com.trello:rxlifecycle:0.1.0'
-    compile 'com.trello:rxlifecycle-components:0.1.0'
+    compile 'com.trello:rxlifecycle:0.3.0'
+    compile 'com.trello:rxlifecycle-components:0.3.0'
 
     // Various
-    compile 'com.github.bumptech.glide:glide:3.5.2'
+    compile 'com.github.bumptech.glide:glide:3.6.1'
 }
 
 buildscript {
