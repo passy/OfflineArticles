@@ -1,6 +1,6 @@
 # Offline Articles
 
-Parse-backed for reading articles on the Tube. Doesn't work yet.
+Parse-backed for reading articles on the Tube. **Doesn't work yet.**
 
 ## Setup
 
