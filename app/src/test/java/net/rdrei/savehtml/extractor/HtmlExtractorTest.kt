@@ -9,13 +9,13 @@ import org.assertj.core.api.Assertions.*
 
 
 public class HtmlExtractorTest {
-    val BASE_PATH = "/base/"
+    val BASE_PATH = "https://base/"
 
     Test
     public fun extractGithubPage() {
         val results = HtmlExtractor.extract(openDocumentResource("net/rdrei/savehtml/extractor/sample0.html"))
-
-        assertThat(results.resources).hasSize(50)
+        println(results.resources)
+        assertThat(results.resources).hasSize(42)
     }
 
     private fun openResource(filename: String): InputStream {
