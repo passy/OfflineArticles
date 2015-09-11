@@ -15,7 +15,7 @@ public object HtmlExtractor {
         val imports: List<String> = doc.select("link[href]").map { it.attr("abs:href") }
         // TODO: Picture element?
 
-        val uris: List<URI> = media.plus(imports).map { URI(it) }
+        val uris: List<URI> = media.plus(imports).map { URI(it) }.distinct()
 
         return HtmlResources(
                 Collections.unmodifiableList(uris)
