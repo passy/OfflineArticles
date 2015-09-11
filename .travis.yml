@@ -19,6 +19,9 @@ branches:
 
 sudo: false
 
+script:
+  - ./gradlew test
+
 cache:
   directories:
     - $HOME/.gradle
