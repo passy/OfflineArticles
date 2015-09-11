@@ -14,9 +14,11 @@ public class HtmlExtractorTest {
 
     Test
     public fun extractGithubPage() {
-        val results = HtmlExtractor.extract(openDocumentResource("net/rdrei/savehtml/extractor/sample0.html"))
-        val expected = openListResource("net/rdrei/savehtml/extractor/sample0-expected.txt").map { URI(it) }
-        assertThat(results.resources).hasSameElementsAs(expected)
+        val results =
+                HtmlExtractor.extract(openDocumentResource("net/rdrei/savehtml/extractor/html0/input.html"))
+        val expectedResources =
+                openListResource("net/rdrei/savehtml/extractor/html0/output.txt").map { URI(it) }
+        assertThat(results.resources).hasSameElementsAs(expectedResources)
     }
 
     private fun openResource(filename: String): InputStream {
