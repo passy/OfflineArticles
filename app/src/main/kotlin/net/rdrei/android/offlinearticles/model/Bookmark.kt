@@ -7,12 +7,12 @@ import rx.Observable
 import rx.parse.ParseObservable
 import java.net.URI
 
-ParseClassName("Bookmark")
+@ParseClassName("Bookmark")
 class Bookmark : ParseObject {
     val KEY_URI = "URI"
 
     companion object Queries {
-        fun getAll(): ParseQuery<Bookmark> = ParseQuery.getQuery(javaClass<Bookmark>())
+        fun getAll(): ParseQuery<Bookmark> = ParseQuery.getQuery(Bookmark::class.java)
         fun getAllObservable(): Observable<Bookmark> = ParseObservable.find(getAll())
     }
 

@@ -6,26 +6,23 @@ import com.trello.rxlifecycle.components.RxActivity
 import net.rdrei.android.offlinearticles.adapter.BookmarkAdapterImpl
 import net.rdrei.android.offlinearticles.model.Bookmark
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.enabled
-import org.jetbrains.anko.id
+import org.jetbrains.anko.verbose
 import org.jetbrains.anko.verticalLayout
 import java.net.URI
-import kotlin.properties.Delegates
 
 public class BookmarkListActivity : RxActivity(), AnkoLogger {
-    val adapter: BookmarkAdapterImpl by Delegates.lazy {
+    val adapter: BookmarkAdapterImpl by lazy(LazyThreadSafetyMode.NONE) {
         BookmarkAdapterImpl()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super<RxActivity>.onCreate(savedInstanceState)
+        super.onCreate(savedInstanceState)
 
         val layoutManager = LinearLayoutManager(this)
 
         verticalLayout {
             refreshLayout {
                 id = R.id.refresh
-                enabled = true
                 setColorSchemeResources(R.color.main, R.color.main_accent)
 
                 setOnRefreshListener {

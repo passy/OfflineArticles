@@ -1,7 +1,6 @@
 package net.rdrei.android.offlinearticles
 
 import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
 import android.view.Menu
@@ -28,7 +27,7 @@ public class MainActivity : Activity() {
             }
 
             button("Add Article") {
-                onClick {  addArticle(newArticle.getText().toString()) }
+                onClick {  addArticle(newArticle.text.toString()) }
             }
 
             // Everyone knows this is for testing only. Right? RIGHT!?

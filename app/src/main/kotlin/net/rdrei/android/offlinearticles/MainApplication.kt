@@ -13,7 +13,7 @@ class MainApplication : Application() {
         ParseCrashReporting.enable(this)
         Parse.enableLocalDatastore(this)
 
-        ParseObject.registerSubclass(javaClass<Bookmark>())
+        ParseObject.registerSubclass(Bookmark::class.java)
 
         Parse.initialize(
                 this,

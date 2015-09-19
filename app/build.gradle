@@ -35,6 +35,7 @@ android {
 repositories {
     jcenter()
     maven { url 'https://github.com/8tory/parse-android-sdk.m2/raw/master/' }
+    mavenCentral()
 }
 
 dependencies {
@@ -43,11 +44,11 @@ dependencies {
     // Android
     compile 'com.android.support:recyclerview-v7:23.0.1'
     // Parse
-    compile 'com.parse:parse-android:1.10.1'
+    compile 'com.parse:parse-android:1.10.2'
     compile 'com.infstory:parse-crash-reporting:1.9.2'
     // Kotlin
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compile 'org.jetbrains.anko:anko:0.6.3-19s'
+    compile 'org.jetbrains.anko:anko-sdk23:0.7'
     // Rx
     compile('com.infstory:rxparse:1.0.3') {
         exclude module: 'parse'
@@ -67,7 +68,7 @@ dependencies {
 }
 
 buildscript {
-    ext.kotlin_version = '0.12.1230'
+    ext.kotlin_version = '0.13.1514'
     repositories {
         mavenCentral()
     }
