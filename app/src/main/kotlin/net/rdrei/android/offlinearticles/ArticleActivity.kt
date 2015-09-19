@@ -8,14 +8,14 @@ import org.jetbrains.anko.verticalLayout
 import org.jetbrains.anko.webView
 
 public class ArticleActivity : RxActivity(), AnkoLogger {
-    var articleWebView: WebView? = null;
+    var articleWebView: WebView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         verticalLayout {
             articleWebView = webView() {
-                id = R.id.articleWebView;
+                id = R.id.articleWebView
 
             }
         }

@@ -41,13 +41,13 @@ public class MainActivity : Activity() {
         val bookmark = Bookmark(URI(uri))
         bookmark.saveEventually()
 
-        ParseAnalytics.trackEventInBackground(getLocalClassName() + ":addArticle")
+        ParseAnalytics.trackEventInBackground(localClassName + ":addArticle")
         toast("New article to be added: " + uri)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu)
+        menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
 
@@ -55,7 +55,7 @@ public class MainActivity : Activity() {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        val id = item.getItemId()
+        val id = item.itemId
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
