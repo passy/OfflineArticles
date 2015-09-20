@@ -25,11 +25,11 @@ public class HtmlExtractorTest {
     }
 
     private fun openResource(filename: String): InputStream {
-        return javaClass.getClassLoader().getResourceAsStream(filename)
+        return javaClass.classLoader.getResourceAsStream(filename)
     }
 
     private fun openListResource(filename: String): List<String> {
-        return File(javaClass.getClassLoader().getResource(filename).toURI()).readLines()
+        return File(javaClass.classLoader.getResource(filename).toURI()).readLines()
     }
 
     private fun openDocumentResource(filename: String): Document {
