@@ -17,22 +17,14 @@ public class HtmlExtractorTest {
         val results =
                 HtmlExtractor.extract(openDocumentResource("net/rdrei/savehtml/extractor/html0/input.html"))
         val expectedResources =
-                openListResource("net/rdrei/savehtml/extractor/html0/resources.txt").map { URI(it) }
+                TestUtil.openListResource("net/rdrei/savehtml/extractor/html0/resources.txt").map { URI(it) }
         val expectedStyles =
-                openListResource("net/rdrei/savehtml/extractor/html0/styles.txt").map { URI(it) }
+                TestUtil.openListResource("net/rdrei/savehtml/extractor/html0/styles.txt").map { URI(it) }
         assertThat(results.resources).hasSameElementsAs(expectedResources)
         assertThat(results.styles).hasSameElementsAs(expectedStyles)
     }
 
-    private fun openResource(filename: String): InputStream {
-        return javaClass.classLoader.getResourceAsStream(filename)
-    }
-
-    private fun openListResource(filename: String): List<String> {
-        return File(javaClass.classLoader.getResource(filename).toURI()).readLines()
-    }
-
     private fun openDocumentResource(filename: String): Document {
-        return Jsoup.parse(openResource(filename), "utf-8", BASE_PATH)
+        return Jsoup.parse(TestUtil.openResource(filename), "utf-8", BASE_PATH)
     }
 }
