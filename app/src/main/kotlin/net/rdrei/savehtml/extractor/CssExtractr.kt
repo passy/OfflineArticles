@@ -1,5 +1,10 @@
 package net.rdrei.savehtml.extractor
 
 /**
- * Created by pascal on 9/20/15.
+ * A non-recursive extractor for CSS resources.
  */
+public object CssExtractor {
+    public fun extract(document: Any): Any {
+        return Any()
+    }
+}

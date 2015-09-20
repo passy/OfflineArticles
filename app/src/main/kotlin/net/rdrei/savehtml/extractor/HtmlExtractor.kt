@@ -14,6 +14,11 @@ data class HtmlResources(val resources: Set<URI>, val styles: Set<URI>)
  * - Picture element? Can I rely on the fallback?
  * - Iframes? GitHub gists for example?
  */
+
+/**
+ * Extract external resources from an HTML page, non-recursively. Covers
+ * stylesheets, link resources and elements specifying an `src` attribute.
+ */
 public object HtmlExtractor {
     fun extract(doc: Document): HtmlResources {
         val src = doc.select("[src]")
