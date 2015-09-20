@@ -12,7 +12,7 @@ import java.net.URI
 public class HtmlExtractorTest {
     val BASE_PATH = "https://base/"
 
-    Test
+    @Test
     public fun extractGithubPage() {
         val results =
                 HtmlExtractor.extract(openDocumentResource("net/rdrei/savehtml/extractor/html0/input.html"))
