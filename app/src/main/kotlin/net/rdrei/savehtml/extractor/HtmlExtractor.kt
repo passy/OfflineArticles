@@ -5,8 +5,6 @@ import java.net.URI
 import java.util.*
 
 
-data class HtmlResources(val resources: Set<URI>, val styles: Set<URI>)
-
 /**
  * TODO:
  *
@@ -20,7 +18,7 @@ data class HtmlResources(val resources: Set<URI>, val styles: Set<URI>)
  * stylesheets, link resources and elements specifying an `src` attribute.
  */
 public object HtmlExtractor {
-    fun extract(doc: Document): HtmlResources {
+    fun extract(doc: Document): Resources {
         val src = doc.select("[src]")
                 .map { it.attr("abs:src") }
                 .map { URI(it) }
@@ -38,7 +36,7 @@ public object HtmlExtractor {
                 .map { URI(it) }
                 .toSet()
 
-        return HtmlResources(
+        return Resources(
                 resources = Collections.unmodifiableSet(resources),
                 styles = Collections.unmodifiableSet(stylesheets)
         )

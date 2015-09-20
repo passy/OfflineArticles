@@ -8,6 +8,10 @@ public object TestUtil {
         return javaClass.classLoader.getResourceAsStream(filename)
     }
 
+    internal fun openStringResource(filename: String): String {
+        return File(javaClass.classLoader.getResource(filename).toURI()).readText()
+    }
+
     internal fun openListResource(filename: String): List<String> {
         return File(javaClass.classLoader.getResource(filename).toURI()).readLines()
     }
