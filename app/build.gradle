@@ -59,7 +59,7 @@ dependencies {
     // Various
     compile 'com.github.bumptech.glide:glide:3.6.1'
     compile 'org.jsoup:jsoup:1.8.3'
-    compile 'com.osbcp:cssparser:1.7'
+    compile 'com.helger:ph-css:4.0.0'
 
     // Testing
     testCompile 'junit:junit:4.12'
