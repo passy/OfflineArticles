@@ -10,7 +10,7 @@ import java.util.*
  */
 public object CssExtractor {
     public fun extract(document: CascadingStyleSheet): Resources {
-        val importRules: List<CSSImportRule> = if (document.allImportRules == null) { Collections.emptyList() } else { document.allImportRules }
+        val importRules: List<CSSImportRule> = document.allImportRules ?: Collections.emptyList()
         val importUris = importRules.map { URI(it.location.uri) }
 
         return Resources(
