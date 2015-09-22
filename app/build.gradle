@@ -30,6 +30,13 @@ android {
         variant.buildConfigField 'String', 'PARSE_APPLICATION_ID', "\"" + parseApplicationId + "\""
         variant.buildConfigField 'String', 'PARSE_CLIENT_KEY', "\"" + parseClientKey + "\""
     }
+
+    packagingOptions {
+        // Required for ph-* package like the CSS parser.
+        exclude 'META-INF/buildinfo.xml'
+        exclude 'NOTICE'
+        exclude 'changelog.xml'
+    }
 }
 
 repositories {
