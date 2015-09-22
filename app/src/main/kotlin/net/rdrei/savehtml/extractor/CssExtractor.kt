@@ -1,6 +1,8 @@
 package net.rdrei.savehtml.extractor
 
+import com.helger.css.decl.CSSImportRule
 import com.helger.css.decl.CascadingStyleSheet
+import java.net.URI
 import java.util.*
 
 /**
@@ -8,6 +10,11 @@ import java.util.*
  */
 public object CssExtractor {
     public fun extract(document: CascadingStyleSheet): Resources {
-        return Resources(Collections.emptySet(), Collections.emptySet())
+        val importRules: List<CSSImportRule> = if (document.allImportRules == null) { Collections.emptyList() } else { document.allImportRules }
+        val importUris = importRules.map { URI(it.location.uri) }
+
+        return Resources(
+                Collections.emptySet(),
+                Collections.unmodifiableSet(importUris.toSet()))
     }
 }
