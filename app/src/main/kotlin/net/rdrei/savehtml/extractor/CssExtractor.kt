@@ -4,6 +4,7 @@ import android.net.Uri
 import com.helger.css.decl.*
 import com.helger.css.decl.visit.CSSVisitor
 import com.helger.css.decl.visit.DefaultCSSUrlVisitor
+import java.io.File
 import java.net.URI
 import java.net.URL
 import java.util.*
@@ -34,10 +35,18 @@ public object CssExtractor {
     }
 
     fun absolutizeURI(baseURI: Uri, uri: Uri): Uri =
-        // TODO!
         if (uri.isAbsolute) {
             uri
         } else {
-            uri
+            baseURI.buildUpon()
+                .encodedPath(if (uri.path.first() == '/') {
+                    uri.encodedPath
+                } else {
+                    File(baseURI.encodedPath.toString(), uri.encodedPath.toString())
+                            .normalize().toString()
+                })
+                .encodedFragment(uri.encodedFragment)
+                .encodedQuery(uri.encodedQuery)
+                .build()
         }
 }

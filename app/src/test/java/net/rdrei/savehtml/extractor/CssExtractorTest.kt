@@ -8,8 +8,10 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
+@Config(manifest=Config.NONE)
 public class CssExtractorTest {
     val BASE_URI = Uri.parse("https://example.com/page/")
 
