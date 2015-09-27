@@ -1,7 +1,7 @@
 package net.rdrei.savehtml.extractor
 
+import android.net.Uri
 import org.jsoup.nodes.Document
-import java.net.URI
 import java.util.*
 
 
@@ -21,19 +21,19 @@ public object HtmlExtractor {
     fun extract(doc: Document): Resources {
         val src = doc.select("[src]")
                 .map { it.attr("abs:src") }
-                .map { URI(it) }
+                .map { Uri.parse(it) }
         val href = doc.select("link[href]")
                 .filter {
                     val rel = it.attr("rel")
                     rel == null || rel != "stylesheet"
                 }
                 .map { it.attr("abs:href") }
-                .map { URI(it) }
-        val resources: Set<URI> = src.plus(href).toSet()
+                .map { Uri.parse(it) }
+        val resources: Set<Uri> = src.plus(href).toSet()
 
-        val stylesheets: Set<URI> = doc.select("link[href][rel=\"stylesheet\"]")
+        val stylesheets: Set<Uri> = doc.select("link[href][rel=\"stylesheet\"]")
                 .map { it.attr("abs:href") }
-                .map { URI(it) }
+                .map { Uri.parse(it) }
                 .toSet()
 
         return Resources(

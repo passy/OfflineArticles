@@ -1,5 +1,6 @@
 package net.rdrei.savehtml.extractor
 
-import java.net.URI
+import android.net.Uri
 
-data class Resources(val resources: Set<URI>, val styles: Set<URI>)
+
+data class Resources(val resources: Set<Uri>, val styles: Set<Uri>)

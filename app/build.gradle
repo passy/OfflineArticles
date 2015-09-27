@@ -30,6 +30,13 @@ android {
         variant.buildConfigField 'String', 'PARSE_APPLICATION_ID', "\"" + parseApplicationId + "\""
         variant.buildConfigField 'String', 'PARSE_CLIENT_KEY', "\"" + parseClientKey + "\""
     }
+
+    packagingOptions {
+        // Required for ph-* package like the CSS parser.
+        exclude 'META-INF/buildinfo.xml'
+        exclude 'NOTICE'
+        exclude 'changelog.xml'
+    }
 }
 
 repositories {
@@ -59,13 +66,14 @@ dependencies {
     // Various
     compile 'com.github.bumptech.glide:glide:3.6.1'
     compile 'org.jsoup:jsoup:1.8.3'
-    compile 'com.osbcp:cssparser:1.7'
+    compile 'com.helger:ph-css:4.0.0'
 
     // Testing
     testCompile 'junit:junit:4.12'
     testCompile 'org.assertj:assertj-core:1.7.1'
     testCompile 'org.mockito:mockito-all:1.9.5'
     testCompile 'com.googlecode.catch-exception:catch-exception:1.2.0'
+    testCompile 'org.robolectric:robolectric:3.0'
 }
 
 buildscript {
@@ -75,6 +83,7 @@ buildscript {
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'org.robolectric:robolectric-gradle-plugin:0.11.0' // robolectric classpath
     }
 }
 
