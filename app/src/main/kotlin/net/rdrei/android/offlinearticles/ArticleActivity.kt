@@ -1,5 +1,6 @@
 package net.rdrei.android.offlinearticles
 
+import android.content.Context
 import android.os.Bundle
 import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
@@ -24,6 +25,7 @@ import rx.android.schedulers.AndroidSchedulers
 import rx.lang.kotlin.observable
 import rx.plugins.RxJavaPlugins
 import rx.schedulers.Schedulers
+import java.io.File
 import java.io.IOError
 import java.io.IOException
 import java.net.URL
@@ -73,9 +75,14 @@ object WebViewResourceExtractor {
             }
         }
 
-    fun saveResponse(response: Response): Unit {
-        // TODO: Do stuff.
-        val basePath = hashResponse(response)
+    fun saveResponse(response: Response, context: Context): Unit {
+        // TODO: Get filesDir thing from an injected configuration object
+        val basePath = File(File(context.filesDir, "changemeplase"), hashResponse(response))
+
+        // TODO: File name normalization. base64 is a bad idea.
+        context.openFileOutput("deleteme-" + hashResponse(response), Context.MODE_PRIVATE).use { stream ->
+            stream.write(response.body().bytes())
+        }
     }
 
     fun hashResponse(response: Response): String =
@@ -110,7 +117,7 @@ public class ArticleActivity : RxActivity(), AnkoLogger {
             .observeOn(scheduler)
             .doOnEach { uri -> info("onEach: " + uri) }
             .flatMap { WebViewResourceExtractor.downloadRequest(it) }
-            .doOnEach { WebViewResourceExtractor.saveResponse(it) }
+            .doOnNext { WebViewResourceExtractor.saveResponse(it, applicationContext) }
             .subscribeOn(AndroidSchedulers.mainThread())
             .subscribe { r: Response ->
                 info("Next: " + r.headers())
