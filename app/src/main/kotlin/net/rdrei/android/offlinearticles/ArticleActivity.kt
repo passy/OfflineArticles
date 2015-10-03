@@ -1,12 +1,42 @@
 package net.rdrei.android.offlinearticles
 
 import android.os.Bundle
-import android.webkit.*
+import android.webkit.WebResourceRequest
+import android.webkit.WebResourceResponse
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import com.trello.rxlifecycle.components.RxActivity
-import org.jetbrains.anko.*
-import java.io.File
-import java.util.*
-import java.util.concurrent.ConcurrentLinkedDeque
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
+import org.jetbrains.anko.verticalLayout
+import org.jetbrains.anko.webView
+import rx.Observable
+import rx.android.schedulers.AndroidSchedulers
+import rx.lang.kotlin.observable
+import java.net.URL
+
+fun String.toURL() = URL(this)
+
+object WebViewResourceExtractor {
+    public fun extract(wv: WebView, url: URL): Observable<WebResourceRequest> =
+        observable { subscriber ->
+            wv.setWebViewClient(object : WebViewClient() {
+                override fun shouldInterceptRequest(view: WebView?, request: WebResourceRequest?): WebResourceResponse? {
+                    if (request != null && !subscriber.isUnsubscribed) {
+                        subscriber.onNext(request)
+                    }
+                    return super.shouldInterceptRequest(view, request)
+                }
+
+                override fun onPageFinished(view: WebView?, url: String?) {
+                    subscriber.onCompleted()
+                    super.onPageFinished(view, url)
+                }
+            })
+
+            wv.loadUrl(url.toString())
+        }
+}
 
 public class ArticleActivity : RxActivity(), AnkoLogger {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,30 +56,11 @@ public class ArticleActivity : RxActivity(), AnkoLogger {
     }
 
     fun setupWebView(wv: WebView): Unit {
-        val requests = ConcurrentLinkedDeque<WebResourceRequest>()
-
-        wv.setWebViewClient(object : WebViewClient() {
-            override fun shouldInterceptRequest(view: WebView?, request: WebResourceRequest?): WebResourceResponse? {
-                if (request != null) {
-                    info("Yolo: " + request.url)
-                    requests.add(request)
-                }
-                return super.shouldInterceptRequest(view, request)
+        WebViewResourceExtractor
+            .extract(wv, "https://github.com/passy".toURL())
+            .subscribe { r ->
+                info("Next: " + r.url)
             }
-
-            override fun onPageFinished(view: WebView?, url: String?) {
-                info { "Site Loaded. Requests: " }
-                requests.forEach {
-                    info(it.method + " " + it.url)
-                    val hashCode = java.lang.String.format("%08x", it.url.hashCode())
-                    val f = File(File(getCacheDir(), "webviewCache"), hashCode)
-                    info("File: " + f)
-                }
-                super.onPageFinished(view, url)
-            }
-        })
-
-        wv.loadUrl("https://twitter.com/passy")
     }
 }
 

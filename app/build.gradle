@@ -50,6 +50,12 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     compile 'org.jetbrains.anko:anko-sdk23:0.7'
     // Rx
+    compile 'io.reactivex:rxandroid:1.0.1'
+    // Because RxAndroid releases are few and far between, it is recommended you also
+    // explicitly depend on RxJava's latest version for bug fixes and new features.
+    compile 'io.reactivex:rxjava:1.0.14'
+    compile 'io.reactivex:rxkotlin:0.22.13'
+
     compile('com.infstory:rxparse:1.0.3') {
         exclude module: 'parse'
         exclude module: 'bolts-android'
