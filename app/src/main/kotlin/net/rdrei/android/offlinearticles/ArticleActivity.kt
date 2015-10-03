@@ -8,7 +8,11 @@ import android.webkit.WebViewClient
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request
 import com.squareup.okhttp.Response
+import com.squareup.okhttp.internal.Util
 import com.trello.rxlifecycle.components.RxActivity
+import net.rdrei.android.offlinearticles.util.Crypto
+import okio.ByteString
+import org.funktionale.collections.prependTo
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.verticalLayout
@@ -23,6 +27,7 @@ import rx.schedulers.Schedulers
 import java.io.IOError
 import java.io.IOException
 import java.net.URL
+import java.security.MessageDigest
 import java.util.concurrent.Executors
 
 fun String.toURL() = URL(this)
@@ -67,6 +72,16 @@ object WebViewResourceExtractor {
                 sub.onError(IOException(resp.message()))
             }
         }
+
+    fun saveResponse(response: Response): Unit {
+        // TODO: Do stuff.
+        val basePath = hashResponse(response)
+    }
+
+    fun hashResponse(response: Response): String =
+        Crypto.shaBase64(
+                ByteString.encodeUtf8(response.request().url().toString())
+        )
 }
 
 public class ArticleActivity : RxActivity(), AnkoLogger {
@@ -95,6 +110,7 @@ public class ArticleActivity : RxActivity(), AnkoLogger {
             .observeOn(scheduler)
             .doOnEach { uri -> info("onEach: " + uri) }
             .flatMap { WebViewResourceExtractor.downloadRequest(it) }
+            .doOnEach { WebViewResourceExtractor.saveResponse(it) }
             .subscribeOn(AndroidSchedulers.mainThread())
             .subscribe { r: Response ->
                 info("Next: " + r.headers())
