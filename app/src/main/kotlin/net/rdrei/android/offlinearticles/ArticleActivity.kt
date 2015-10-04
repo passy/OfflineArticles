@@ -34,11 +34,12 @@ import java.util.concurrent.Executors
 
 fun String.toURL() = URL(this)
 
-object WebViewResourceExtractor {
+class WebViewResourceExtractor(val baseURL: URL) {
     val client: OkHttpClient = OkHttpClient()
-    // TODO: Inject, reuse an Application-wide one, pls.
+    val urlSha: String = Crypto.sha256(ByteString.encodeUtf8(baseURL.toString())).hex()
 
-    public fun extract(wv: WebView, url: URL): Observable<WebResourceRequest> =
+    // TODO: Inject, reuse an Application-wide one, pls.
+    public fun extract(wv: WebView): Observable<WebResourceRequest> =
         observable { subscriber ->
             wv.setWebViewClient(object : WebViewClient() {
                 override fun shouldInterceptRequest(view: WebView?, request: WebResourceRequest?): WebResourceResponse? {
@@ -54,7 +55,7 @@ object WebViewResourceExtractor {
                 }
             })
 
-            wv.loadUrl(url.toString())
+            wv.loadUrl(baseURL.toString())
         }
 
     public fun downloadRequest(req: WebResourceRequest): Observable<Response> =
@@ -77,12 +78,10 @@ object WebViewResourceExtractor {
 
     fun saveResponse(response: Response, context: Context): Unit {
         // TODO: Get filesDir thing from an injected configuration object
-        val basePath = File(File(context.filesDir, "changemeplase"), hashResponse(response))
-
-        // TODO: File name normalization. base64 is a bad idea.
-        context.openFileOutput("deleteme-" + hashResponse(response), Context.MODE_PRIVATE).use { stream ->
-            stream.write(response.body().bytes())
-        }
+        val basePath = File(File(context.filesDir, "changemeplase"), urlSha)
+        // TODO: Handle errors, sigh ... Could already exist which is fine, but also fail writing.
+        basePath.mkdirs()
+        File(basePath, hashResponse(response)).writeBytes(response.body().bytes())
     }
 
     fun hashResponse(response: Response): String =
@@ -112,12 +111,15 @@ public class ArticleActivity : RxActivity(), AnkoLogger {
     fun setupWebView(wv: WebView): Unit {
         val executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors())
         val scheduler = Schedulers.from(executor)
-        WebViewResourceExtractor
-            .extract(wv, "https://github.com/passy".toURL())
+        val url = "https://github.com/passy".toURL()
+        val extractor = WebViewResourceExtractor(url)
+
+        extractor
+            .extract(wv)
             .observeOn(scheduler)
-            .doOnEach { uri -> info("onEach: " + uri) }
-            .flatMap { WebViewResourceExtractor.downloadRequest(it) }
-            .doOnNext { WebViewResourceExtractor.saveResponse(it, applicationContext) }
+            .doOnEach { info("onEach: " + it) }
+            .flatMap { extractor.downloadRequest(it) }
+            .doOnNext { extractor.saveResponse(it, applicationContext) }
             .subscribeOn(AndroidSchedulers.mainThread())
             .subscribe { r: Response ->
                 info("Next: " + r.headers())
