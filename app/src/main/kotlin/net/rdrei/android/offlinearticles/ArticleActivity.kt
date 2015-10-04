@@ -86,9 +86,9 @@ object WebViewResourceExtractor {
     }
 
     fun hashResponse(response: Response): String =
-        Crypto.shaBase64(
+        Crypto.sha256(
                 ByteString.encodeUtf8(response.request().url().toString())
-        )
+        ).hex()
 }
 
 public class ArticleActivity : RxActivity(), AnkoLogger {

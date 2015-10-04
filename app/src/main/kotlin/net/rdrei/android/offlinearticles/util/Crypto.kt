@@ -6,10 +6,6 @@ import java.security.NoSuchAlgorithmException
 import okio.ByteString
 
 object Crypto {
-    /** Returns a Base 64-encoded string containing a SHA-1 hash of `s`. */
-    fun shaBase64(s: ByteString): String =
-        ByteString.of(*sha256Bytes(s)).base64()
-
     /** Returns a SHA-256 hash of `s`. */
     fun sha256(s: ByteString): ByteString =
         ByteString.of(*sha256Bytes(s))
