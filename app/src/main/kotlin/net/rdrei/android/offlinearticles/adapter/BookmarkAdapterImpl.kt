@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import net.rdrei.android.offlinearticles.ArticleActivity
+import net.rdrei.android.offlinearticles.ArticleSaveActivity
 import net.rdrei.android.offlinearticles.R
 import net.rdrei.android.offlinearticles.model.Bookmark
 import org.jetbrains.anko.*
@@ -34,7 +34,7 @@ class BookmarkAdapterImpl : BookmarkAdapter, RecyclerView.Adapter<BookmarkAdapte
 
         val text = v.find<TextView>(R.id.text)
         // Leak!
-        v.setOnClickListener { ctx.startActivity(ctx.intentFor<ArticleActivity>()) }
+        v.setOnClickListener { ctx.startActivity(ctx.intentFor<ArticleSaveActivity>()) }
 
         return ViewHolder(v, text)
     }

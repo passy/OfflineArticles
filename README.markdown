@@ -2,6 +2,10 @@
 
 Parse-backed for reading articles on the Tube. **Doesn't work yet.**
 
+Right now, this is just to validate an idea. I'm trying really hard to avoid
+getting hung up on any code quality issues until I know that this actually
+works.
+
 ## Setup
 
 Go to [parse.com](https://parse.com/), create a new app, add your keys to a new

@@ -25,7 +25,11 @@
             android:name=".BookmarkListActivity"
             android:label="Bookmark List" />
         <activity
-            android:name=".ArticleActivity"
+            android:name=".ArticleSaveActivity"
+            android:label="Saving Article …" />
+        <activity
+            android:name=".ArticleReadActivity"
+            android:exported="true"
             android:label="Loading Article …" />
     </application>
 </manifest>

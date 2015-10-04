@@ -90,9 +90,9 @@ class WebViewResourceExtractor(val baseURL: URL) {
         ).hex()
 }
 
-public class ArticleActivity : RxActivity(), AnkoLogger {
+public class ArticleSaveActivity : RxActivity(), AnkoLogger {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?): Unit {
         super.onCreate(savedInstanceState)
 
         var articleWebView: WebView? = null
@@ -109,6 +109,7 @@ public class ArticleActivity : RxActivity(), AnkoLogger {
     }
 
     fun setupWebView(wv: WebView): Unit {
+        // TODO: Consider using Schedulers.io()
         val executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors())
         val scheduler = Schedulers.from(executor)
         val url = "https://github.com/passy".toURL()
@@ -122,7 +123,7 @@ public class ArticleActivity : RxActivity(), AnkoLogger {
             .doOnNext { extractor.saveResponse(it, applicationContext) }
             .subscribeOn(AndroidSchedulers.mainThread())
             .subscribe { r: Response ->
-                info("Next: " + r.headers())
+                info("Next: " + r.request().urlString())
             }
     }
 }
