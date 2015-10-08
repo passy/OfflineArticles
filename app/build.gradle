@@ -55,7 +55,7 @@ dependencies {
     // Android
     compile 'com.android.support:recyclerview-v7:23.0.1'
     // Parse
-    compile 'com.parse:parse-android:1.10.2'
+    compile 'com.parse:parse-android:1.10.3'
     compile 'com.infstory:parse-crash-reporting:1.9.2'
     // Kotlin
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -65,7 +65,7 @@ dependencies {
     // Because RxAndroid releases are few and far between, it is recommended you also
     // explicitly depend on RxJava's latest version for bug fixes and new features.
     compile 'io.reactivex:rxjava:1.0.14'
-    compile 'io.reactivex:rxkotlin:0.22.13'
+    compile 'io.reactivex:rxkotlin:0.22.14'
 
     compile('com.infstory:rxparse:1.0.3') {
         exclude module: 'parse'
@@ -73,7 +73,7 @@ dependencies {
     }
     compile 'com.trello:rxlifecycle:0.3.0'
     compile 'com.trello:rxlifecycle-components:0.3.0'
-    compile 'io.reactivex:rxjava-debug:1.0.1'
+    compile 'io.reactivex:rxjava-debug:1.0.2'
     // Various
     compile 'com.github.bumptech.glide:glide:3.6.1'
     compile 'org.jsoup:jsoup:1.8.3'
@@ -90,7 +90,7 @@ dependencies {
 }
 
 buildscript {
-    ext.kotlin_version = '0.14.449'
+    ext.kotlin_version = '0.14.451'
     repositories {
         mavenCentral()
     }

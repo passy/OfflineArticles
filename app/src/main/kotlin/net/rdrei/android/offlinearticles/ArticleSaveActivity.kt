@@ -13,7 +13,6 @@ import com.squareup.okhttp.internal.Util
 import com.trello.rxlifecycle.components.RxActivity
 import net.rdrei.android.offlinearticles.util.Crypto
 import okio.ByteString
-import org.funktionale.collections.prependTo
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.verticalLayout
