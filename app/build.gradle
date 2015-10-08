@@ -1,8 +1,19 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'com.github.ben-manes.versions'
+apply plugin: 'com.github.ben-manes.versions'
 
 apply from: 'https://raw.githubusercontent.com/nenick/AndroidStudioAndRobolectric/9d3dafece0b5086f4bd0ef0709073d4de6574197/app/build.workaround-missing-resource.gradle'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.11.3'
+    }
+}
 
 android {
     compileSdkVersion 23
