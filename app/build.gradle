@@ -59,7 +59,7 @@ dependencies {
     compile 'com.infstory:parse-crash-reporting:1.9.2'
     // Kotlin
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compile 'org.jetbrains.anko:anko-sdk23:0.7'
+    compile 'org.jetbrains.anko:anko-sdk23:0.7.1'
     // Rx
     compile 'io.reactivex:rxandroid:1.0.1'
     // Because RxAndroid releases are few and far between, it is recommended you also
