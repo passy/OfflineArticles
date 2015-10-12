@@ -6,6 +6,7 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import com.squareup.okhttp.Headers
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request
 import com.squareup.okhttp.Response
@@ -61,6 +62,7 @@ class WebViewResourceExtractor(val baseURL: URL) {
         observable { sub ->
             val httpReq = Request.Builder()
                     .url(req.url.toString())
+                    .headers(Headers.of(req.requestHeaders))
                     .build()
 
             val resp = client
